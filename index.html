@@ -142,7 +142,7 @@ nav.shrunk{height:56px;background:var(--nav-bg2);}
 }
 .nav-cta:hover{background:var(--teal);color:var(--ink);transform:translateY(-1px);}
 
-/* ─── THEME TOGGLE BUTTON ─── */
+/* ─── THEME TOGGLE ─── */
 .theme-btn{
   width:42px;height:42px;border-radius:50%;
   background:var(--surface2);
@@ -151,15 +151,11 @@ nav.shrunk{height:56px;background:var(--nav-bg2);}
   cursor:none;transition:all .25s;
   font-size:18px;flex-shrink:0;
 }
-.theme-btn:hover{
-  border-color:var(--teal);
-  background:rgba(0,201,167,.1);
-  transform:rotate(20deg) scale(1.08);
-}
-.theme-btn .icon-sun{ display:none; }
-.theme-btn .icon-moon{ display:block; }
-[data-theme="light"] .theme-btn .icon-sun{ display:block; }
-[data-theme="light"] .theme-btn .icon-moon{ display:none; }
+.theme-btn:hover{border-color:var(--teal);background:rgba(0,201,167,.1);transform:rotate(20deg) scale(1.08);}
+.theme-btn .icon-sun{display:none;}
+.theme-btn .icon-moon{display:block;}
+[data-theme="light"] .theme-btn .icon-sun{display:block;}
+[data-theme="light"] .theme-btn .icon-moon{display:none;}
 
 /* ─── SECTION LABELS ─── */
 .sec-chip{
@@ -251,8 +247,10 @@ nav.shrunk{height:56px;background:var(--nav-bg2);}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes spinRev{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
 .round-inner{position:relative;z-index:3;width:100%;height:100%;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#1a2535,#0d1825);border:3px solid rgba(0,201,167,.25);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(0,201,167,.1),0 8px 40px rgba(0,0,0,.5);}
-/* ── PHOTO: change src="your-photo.jpg" to your image filename ── */
-#userPhoto{width:100%;height:100%;object-fit:cover;object-position:top center;}
+#userPhoto{width:100%;height:100%;object-fit:cover;object-position:top center;display:none;}
+.ph-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;}
+.ph-icon{font-size:68px;opacity:.5;}
+.ph-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--slate);}
 .name-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:16px 32px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.15);}
 .name-card h3{font-family:var(--display);font-size:22px;font-weight:700;color:var(--white);}
 .name-card p{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-top:5px;}
@@ -473,7 +471,6 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
   </div>
-  <!-- Dark / Light toggle -->
   <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" onclick="toggleTheme()">
     <span class="icon-moon">🌙</span>
     <span class="icon-sun">☀️</span>
@@ -502,8 +499,8 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
       <span class="line"><span class="word">Jagdish Bhatt</span></span>
     </h1>
     <p class="hero-sub">
-      A <strong>Web Designer & Developer</strong> from Nepal crafting clean,
-      functional digital experiences with <strong>HTML, CSS, JavaScript & PHP</strong>.
+      A <strong>Web Designer &amp; Developer</strong> from Nepal crafting clean,
+      functional digital experiences with <strong>HTML, CSS, JavaScript &amp; PHP</strong>.
     </p>
     <div class="hero-actions">
       <button class="btn-fill" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">View My Work</button>
@@ -553,28 +550,29 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
         </svg>
       </div>
       <div class="round-inner">
+        <div class="ph-inner" id="phPlaceholder">
+          <div class="ph-icon">👤</div>
+          <div class="ph-label">Your Photo</div>
+        </div>
         <!--
           ════════════════════════════════════════
-          TO CHANGE YOUR PHOTO:
-          Replace  img.jpg  below with your image
-          filename, e.g.  src="jagdish.png"
-          Make sure the image file is in the SAME
-          folder as this index.html file.
+          TO CHANGE YOUR PROFILE PHOTO:
+          Replace  img.jpg  with your image file,
+          e.g.  src="jagdish.png"
+          Make sure the image is in the SAME folder
+          as this index.html file.
           ════════════════════════════════════════
         -->
-        <img id="userPhoto" src="img.jpg" alt="Jagdish Bhatt"
-             onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
-        <div id="phFallback" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;background:linear-gradient(135deg,#1E2D40,#162030);">
-          <div style="font-size:68px;opacity:.5;">👤</div>
-          <div style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8892A4;">Your Photo</div>
-        </div>
+        <img id="userPhoto" src="./img.jpg" alt="Jagdish Bhatt">
       </div>
     </div>
 
     <div class="name-card">
       <h3>Jagdish Bhatt</h3>
-      <p>Web Designer & Developer</p>
+      <p>Web Designer &amp; Developer</p>
     </div>
+
+
   </div>
 
   <div class="scroll-ind">
@@ -595,7 +593,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
     <div class="info-card rv">
       <div class="ic-label">Projects Completed</div>
       <div class="ic-val">3<sup>+</sup></div>
-      <div class="ic-sub">Haat Bazar, Sole Stride & Guide-Way</div>
+      <div class="ic-sub">Haat Bazar, Sole Stride &amp; Guide-Way</div>
     </div>
     <div class="info-card rv d1">
       <div class="ic-label">Core Stack</div>
@@ -605,7 +603,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
     <div class="info-card rv d2">
       <div class="ic-label">Based In</div>
       <div class="ic-val" style="font-size:26px;">Nepal 🇳🇵</div>
-      <div class="ic-sub">Open to remote & local work</div>
+      <div class="ic-sub">Open to remote &amp; local work</div>
     </div>
   </div>
 </section>
@@ -624,7 +622,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
     <div class="sk-card rv d1">
       <div class="sk-top"><div class="sk-icon-wrap">🎨</div><span class="sk-pct-badge">88%</span></div>
       <div class="sk-name">CSS</div>
-      <p class="sk-desc">From responsive layouts to polished animations — pixel-perfect interfaces with modern CSS3, Flexbox & Grid.</p>
+      <p class="sk-desc">From responsive layouts to polished animations — pixel-perfect interfaces with modern CSS3, Flexbox &amp; Grid.</p>
       <div class="sk-track"><div class="sk-fill" style="--w:88%"></div></div>
     </div>
     <div class="sk-card rv d2">
@@ -652,7 +650,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
       <div class="proj-body">
         <div class="proj-meta"><span class="proj-year">2024 — Nepal</span><div class="proj-link-icon">↗</div></div>
         <div class="proj-name">Haat Bazar</div>
-        <p class="proj-desc">A fully functional Nepal local handicraft marketplace connecting skilled artisans from Bhaktapur, Patan, and Dhankuta with buyers. Features product listings, artisan profiles, cart & NPR pricing.</p>
+        <p class="proj-desc">A fully functional Nepal local handicraft marketplace connecting skilled artisans from Bhaktapur, Patan, and Dhankuta with buyers. Features product listings, artisan profiles, cart &amp; NPR pricing.</p>
         <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">PHP</span><span class="proj-tag">UI/UX</span></div>
       </div>
     </div>
@@ -670,7 +668,7 @@ footer{background:var(--footer-bg);border-top:1px solid var(--border);padding:24
       <div class="proj-body">
         <div class="proj-meta"><span class="proj-year">2025 — Tourism System</span><div class="proj-link-icon">↗</div></div>
         <div class="proj-name">Guide-Way</div>
-        <p class="proj-desc">An online tourism management system that helps users explore destinations, view detailed info & images, and connect with local guides and hotels — all in one platform.</p>
+        <p class="proj-desc">An online tourism management system that helps users explore destinations, view detailed info &amp; images, and connect with local guides and hotels — all in one platform.</p>
         <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span></div>
       </div>
     </div>
@@ -746,14 +744,13 @@ document.addEventListener('click',e=>{
 const dot=document.getElementById('dot');
 document.addEventListener('mousemove',e=>{dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';});
 
-/* ── DARK / LIGHT THEME TOGGLE ── */
+/* DARK / LIGHT THEME TOGGLE */
 function toggleTheme(){
   const html=document.documentElement;
   const isDark=html.getAttribute('data-theme')==='dark';
-  html.setAttribute('data-theme', isDark?'light':'dark');
-  localStorage.setItem('jb_theme', isDark?'light':'dark');
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  localStorage.setItem('jb_theme',isDark?'light':'dark');
 }
-/* Restore saved theme on load */
 (function(){
   const saved=localStorage.getItem('jb_theme');
   if(saved) document.documentElement.setAttribute('data-theme',saved);
@@ -770,11 +767,19 @@ window.addEventListener('scroll',()=>{
   });
 });
 
+/* PHOTO — change src="img.jpg" in the HTML to your image filename */
+(function(){
+  const img=document.getElementById('userPhoto');
+  const ph=document.getElementById('phPlaceholder');
+  img.onload=function(){ img.style.display='block'; if(ph) ph.style.display='none'; };
+  img.onerror=function(){ img.style.display='none'; if(ph) ph.style.display='flex'; };
+})();
+
 /* ABOUT ANIMATION */
 const p1="I'm Jagdish Bhatt, a passionate web designer & developer from Nepal. I love turning ideas into elegant, functional digital products — from the very first sketch to the final deployed line of code.";
 const p2="My journey started with curiosity about how websites work and grew into a craft I practise every day. I believe great web experiences are built on clean HTML, expressive CSS, dynamic JavaScript, and solid PHP backends.";
 function buildPara(id,txt,base){
-  const el=document.getElementById(id);if(!el)return;
+  const el=document.getElementById(id); if(!el) return;
   el.innerHTML=txt.split(' ').map((w,i)=>{
     const s=['Jagdish','Bhatt','web','designer','developer','Nepal','HTML','CSS','JavaScript','PHP'].includes(w.replace(/[,.'—]/g,''));
     const em=['elegant,','functional','clean','expressive','dynamic','solid'].includes(w.replace(/[,.'—]/g,''));
@@ -791,22 +796,22 @@ new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)document.queryS
 const rvObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
-/* FORM */
+/* CONTACT FORM — EmailJS */
 function handleSend(e){
   e.preventDefault();
   const btn=document.getElementById('sb'),form=e.target;
   const name=form.from_name.value.trim(),email=form.from_email.value.trim();
-  if(!name||!email)return;
-  btn.textContent='Sending…';btn.disabled=true;btn.style.opacity='.7';
+  if(!name||!email) return;
+  btn.textContent='Sending…'; btn.disabled=true; btn.style.opacity='.7';
   emailjs.sendForm('service_9xajhbs','template_sm5xhto',form)
   .then(()=>{
-    btn.textContent='✓ Message Sent!';btn.style.opacity='1';btn.style.background='#00A88C';btn.disabled=false;form.reset();
-    setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='var(--teal)';},3500);
+    btn.textContent='✓ Message Sent!'; btn.style.opacity='1'; btn.style.background='#00A88C'; btn.disabled=false; form.reset();
+    setTimeout(()=>{ btn.textContent='Send Message →'; btn.style.background='var(--teal)'; },3500);
   })
   .catch(err=>{
     console.error(err);
-    btn.textContent='✗ Failed — Try Again';btn.style.background='#E05252';btn.style.opacity='1';btn.disabled=false;
-    setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='var(--teal)';},3500);
+    btn.textContent='✗ Failed — Try Again'; btn.style.background='#E05252'; btn.style.opacity='1'; btn.disabled=false;
+    setTimeout(()=>{ btn.textContent='Send Message →'; btn.style.background='var(--teal)'; },3500);
   });
 }
 </script>
